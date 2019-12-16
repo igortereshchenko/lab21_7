@@ -1,4 +1,4 @@
-import plotly
+from plotly.utils import PlotlyJSONEncoder
 import plotly.plotly as py
 import plotly.graph_objs as go
 import json
@@ -88,7 +88,7 @@ def dashboard():
 
     ids = [0, 1]
     names = ["Template field count", "Field and templates count for each user"]
-    graph_json = json.dumps(data, cls=plotly.utils.PlotlyJSONEncoder)
+    graph_json = json.dumps(data, cls=PlotlyJSONEncoder)
     return render_template('dashboard.html', form=form, form_name="Username", action="dashboard", username=username,
                            graphJSON=graph_json, ids=ids, names=names)
 

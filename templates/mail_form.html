@@ -1,0 +1,102 @@
+
+
+{% extends "index.html" %}
+
+{% block content %}
+
+<!--https://www.codeply.com/go/nhbdi2FkJm-->
+
+
+<div class="col-md-6 mx-auto">
+
+    <!-- form card login -->
+    <div class="card rounded-0">
+
+        <div class="card-header">
+            <h3 class="mb-0">{{form_name}}</h3>
+        </div>
+        <div class="card-body">
+
+            <form class="form"  action = "/{{action}}" method = post >
+                {{ form.hidden_tag() }}
+
+                                
+            <div class="form-group">
+                {{ form.mail_id.label }}
+                {{ form.mail_id(class_="form-control") }}
+
+                {% if form.mail_id.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.mail_id.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+            <div class="form-group">
+                {{ form.mail_domain.label }}
+                {{ form.mail_domain(class_="form-control") }}
+
+                {% if form.mail_domain.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.mail_domain.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+            <div class="form-group">
+                {{ form.mail_receiver.label }}
+                {{ form.mail_receiver(class_="form-control") }}
+
+                {% if form.mail_receiver.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.mail_receiver.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+                <div class="form-group">
+                {{ form.mail_sender.label }}
+                {{ form.mail_sender(class_="form-control") }}
+
+                {% if form.mail_sender.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.mail_sender.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+
+                <div class="form-group">
+                {{ form.mail_datetime.label }}
+                {{ form.mail_datetime(class_="form-control") }}
+
+                {% if form.mail_datetime.errors%}
+                    <div class="alert alert-danger" role="alert">
+                        {% for message in form.mail_datetime.errors %}
+                             <div>{{ message }}</div>
+                        {% endfor %}
+                    </div>
+                {%endif%}
+            </div>
+                           {{ form.submit(class_="btn btn-success") }}
+            </form>
+        </div>
+        <!--/card-block-->
+    </div>
+    <!-- /form card login -->
+
+</div>
+
+</div>
+
+
+
+
+{% endblock %}

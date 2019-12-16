@@ -1,12 +1,12 @@
 from flask_wtf import Form
-from wtforms import *
+from wtforms import ValidationError, IntegerField, StringField, validators, DateField, SubmitField
 from dao.db import *
 from dao.orm.model import *
 from datetime import datetime
 
 
 def validate_date(form, field):
-    if field.data <= datetime.now():
+    if field.data <= datetime.now().date():
         raise ValidationError('Datetime > now')
 
 class MailForm(Form):

@@ -10,7 +10,43 @@ from dao.orm.model import *
 from forms.mail_form import *
 
 from datetime import datetime
+from plotly.utils import PlotlyJSONEncoder
+import json
+import plotly.graph_objs as go
 
+
+@app.route('/plotly', methods=['GET'])
+def plotly():
+    db = PostgresDb()
+
+    x = []
+    y = []
+
+    mail_dict = {}
+
+    mails = db.sqlalchemy_session.query(Mail).all()
+
+    for mail in mails:
+        if mail.mail_datetime in mail_dict:
+            mail_dict[mail.mail_datetime] += 1
+        else:
+            mail_dict[mail.mail_datetime] = 1
+
+    for (date, count) in mail_dict.items():
+        x.append(date)
+        y.append(count)
+
+    scatter = go.Scatter(
+        x=x,
+        y=y,
+    )
+
+    data = [scatter]
+
+    ids = [1]
+    names = ["Datetime count"]
+    graph_json = json.dumps(data, cls=PlotlyJSONEncoder)
+    return render_template('plotly.html', graphJSON=graph_json, ids=ids, names=names)
 
 @app.route('/show', methods=['GET'])
 def mail():
