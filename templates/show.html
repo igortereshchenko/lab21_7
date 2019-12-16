@@ -1,0 +1,39 @@
+{% extends "index.html" %}
+
+{% block content %}
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Domain</th>
+                <th scope="col">Receiver</th>
+                <th scope="col">Sender</th>
+                <th scope="col">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {% for mail in mails %}
+            <tr >
+                <td>{{mail.mail_id}}</td>
+                <td>{{mail.mail_domain}}</td>
+                <td>{{mail.mail_receiver}}</td>
+                <td>{{mail.mail_sender}}</td>
+                <td>{{mail.mail_datetime}}</td>
+                <td>
+                    <button type="button" class="btn btn-warning" name="btn_edit_mail" data-mail_id="{{mail.mail_id}}">Edit</button>
+                    <button type="button" class="btn btn-danger" name="btn_delete_mail" data-mail_id="{{mail.mail_id}}">Delete</button>
+                </td>
+            </tr>
+        {% endfor %}
+            <tr>
+                <td> <button type="button" class="btn btn-success" name="btn_new_mail">New Mail</button> </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+    <script src="{{ url_for('static', filename='js/mail.js') }}"></script>
+
+{% endblock %}
